@@ -1,0 +1,13 @@
+<%= form_for(@timbre) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <div class="form-group">
+    <%= f.text_field :sound_src, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.text_area :description, class: "form-control", placeholder: "Compose new micropost..." %>
+  </div>
+  
+  <%= f.submit "送信", class: "btn btn-primary" %>
+<% end %>

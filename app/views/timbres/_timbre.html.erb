@@ -1,0 +1,14 @@
+<li id="timbre-<%= timbre.id %>">
+  <%= link_to gravatar_for(timbre.user, size: 50), timbre.user %>
+  <span class="user"><%= link_to timbre.user.name, timbre.user %></span>
+  <span class="sound_src"><%= timbre.sound_src %></span>
+  <span class="description"><%= timbre.description %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(timbre.created_at) %> ago.
+    
+    <% if current_user == timbre.user %>
+      <%= link_to 'delete', timbre, method: :delete, data: { confirm: 'You sure?' } %>
+    <% end %>
+    
+  </span>
+</li>
