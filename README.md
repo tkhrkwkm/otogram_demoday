@@ -1,28 +1,12 @@
-== README
+# otogram - β - [オトグラム（仮）]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+誰でもが簡単に作曲できるWEBサービスを開発中！  
+興味のある人、開発協力お願い致します。
 
-Things you may want to cover:
+## 開発環境
 
-* Ruby version
+Ruby on Rails
 
-* System dependencies
+## 主要メンバー
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Takahiro[@otogram_beta](https://twitter.com/otogram_beta)
