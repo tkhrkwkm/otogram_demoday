@@ -92,6 +92,17 @@ reset bootstrap
 input[type="submit"] {
   font-weight: bold;
 }
+#error_explanation {
+  ul {
+    margin-bottom: 20px;
+  }
+  li {
+    color: red;
+    font-size: 14px;
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+}
 .field_with_errors {
   @extend .has-error;
 }
