@@ -107,13 +107,59 @@ input[type="submit"] {
   @extend .has-error;
 }
 /*------------------------------------------------------------------------------
-Home
+Top
 ------------------------------------------------------------------------------*/
-#Home {
+#Top {
   h1 {
     padding: 50px;
     font-size: 60px;
     text-align: center;
+  }
+}
+/*------------------------------------------------------------------------------
+Home
+------------------------------------------------------------------------------*/
+#Home {
+  section.user_info {
+    margin-bottom: 10px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    div.photo {
+      float: left;
+    }
+    div.name {
+      margin-left: 10px;
+      float: left;
+    }
+    div.name a {
+      color: #333;
+      font-weight: bold;
+    }
+    ul li {
+      float: left;
+      width: 33%;
+      text-align: center;
+    }
+    ul li div.status_label {
+      font-size:12px;
+    }
+    ul li a {
+      font-weight: bold;
+    }
+  }
+  section.timbre_form {
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
   }
 }
 /*------------------------------------------------------------------------------

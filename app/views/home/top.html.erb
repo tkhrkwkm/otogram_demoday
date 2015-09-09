@@ -1,16 +1,52 @@
 <% if logged_in? %>
-  <div class="row">
+  <div id="Home" class="row">
     <aside class="col-md-4">
       <section class="user_info">
-        <%= render 'shared/user_info' %>
+        <div class="clearfix">
+          <div class="photo"><%= link_to gravatar_for(current_user, size: 72), current_user %></div>
+          <div class="name"><%= link_to current_user.name, current_user %></div>
+        </div>
+        <ul class="clearfix">
+          <li>
+            <div class="status_label">ティンバー</div>
+            <div class="status_value"><%= link_to current_user.timbres.count, '#' %></div>
+          </li>
+          <li>
+            <div class="status_label">フォロー</div>
+            <div class="status_value"><a href="#">0</a></div>
+          </li>
+          <li>
+            <div class="status_label">フォロワー</div>
+            <div class="status_value"><a href="#">0</a></div>
+          </li>
+        </ul>
       </section>
-      <section class="micropost_form">
-        <%= render 'shared/timbre_form' %>
+
+      <section class="timbre_form">
+        <%= form_for(@timbre, html:{class: 'form-inline'}) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="form-group">
+            <%= f.text_field :sound_src, class: 'form-control', placeholder: 'Compose new timbre...' %>
+            <%= f.submit '送信', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
       </section>
     </aside>
+  
+    <div class="col-md-8">
+      <% if current_user.timbres.any? %>
+        <h3>timbres (<%= current_user.timbres.count %>)</h3>
+        <ol class="timbres">
+          <%= render partial: 'timbres/timbre', collection: @timbres %>
+        </ol>
+      <% end %>
+    </div>
+
   </div>
 <% else %>
-<div id="Home">
-  <h1>We're enjoying Otogram!!</h1>
-</div>
+  <div id="Top" class="row">
+    <div class="col-md-12">
+      <h1>We're enjoying Otogram!!</h1>
+    </div>
+  </div>
 <% end %>
