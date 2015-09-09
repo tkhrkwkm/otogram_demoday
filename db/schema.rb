@@ -16,9 +16,8 @@ ActiveRecord::Schema.define(version: 20150909124926) do
   create_table "timbres", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "sound_src"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "timbres", ["user_id", "created_at"], name: "index_timbres_on_user_id_and_created_at"

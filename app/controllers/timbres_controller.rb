@@ -21,6 +21,6 @@ class TimbresController < ApplicationController
   
   private
   def timbre_params
-    params.require(:timbre).permit(:sound_src, :description)
+    params.require(:timbre).permit(:sound_src)
   end
 end
