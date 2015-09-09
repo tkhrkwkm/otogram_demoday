@@ -18,8 +18,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
       <% unless logged_in? %>
-        <li><%= link_to "新規登録", signup_path %></li>
-        <li><%= link_to "ログイン", login_path %></li>
+        <li><%= link_to '新規登録', signup_path %></li>
+        <li><%= link_to 'ログイン', login_path %></li>
       <% else %>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
@@ -29,10 +29,10 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "プロフィール", current_user %></li>
-            <li><%= link_to "設定", edit_user_path(current_user) %></li>
+            <li><%= link_to 'プロフィール', current_user %></li>
+            <li><%= link_to '設定', edit_user_path(current_user) %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "ログアウト", logout_path, method: "delete" %></li>
+            <li><%= link_to 'ログアウト', logout_path, method: 'delete' %></li>
           </ul>
         </li>
       <% end %>
