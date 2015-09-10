@@ -6,13 +6,7 @@
       </section>
 
       <section class="timbre_form">
-        <%= form_for(@timbre, html:{class: 'form-inline'}) do |f| %>
-          <%= render 'shared/error_messages', object: f.object %>
-          <div class="form-group">
-            <%= f.text_field :sound_src, class: 'form-control', placeholder: 'Compose new timbre...' %>
-            <%= f.submit '送信', class: 'btn btn-primary' %>
-          </div>
-        <% end %>
+        <%= render 'timbres/timbre_form' %>
       </section>
     </aside>
   
