@@ -2,24 +2,7 @@
   <div id="Home" class="row">
     <aside class="col-md-4">
       <section class="user_info">
-        <div class="clearfix">
-          <div class="photo"><%= link_to gravatar_for(current_user, size: 72), current_user %></div>
-          <div class="name"><%= link_to current_user.name, current_user %></div>
-        </div>
-        <ul class="clearfix">
-          <li>
-            <div class="status_label">ティンバー</div>
-            <div class="status_value"><%= link_to current_user.timbres.count, '#' %></div>
-          </li>
-          <li>
-            <div class="status_label">フォロー</div>
-            <div class="status_value"><a href="#">0</a></div>
-          </li>
-          <li>
-            <div class="status_label">フォロワー</div>
-            <div class="status_value"><a href="#">0</a></div>
-          </li>
-        </ul>
+        <%= render 'shared/user_info' %>
       </section>
 
       <section class="timbre_form">
@@ -34,12 +17,13 @@
     </aside>
   
     <div class="col-md-8">
-      <% if current_user.timbres.any? %>
-        <h3>timbres (<%= current_user.timbres.count %>)</h3>
-        <ol class="timbres">
-          <%= render partial: 'timbres/timbre', collection: @timbres %>
-        </ol>
-      <% end %>
+      <section class="timbre_list">
+        <% if current_user.timbres.any? %>
+          <ul class="timbres">
+            <%= render partial: 'timbres/timbre', collection: @timbres %>
+          </ul>
+        <% end %>
+      </section>
     </div>
 
   </div>
