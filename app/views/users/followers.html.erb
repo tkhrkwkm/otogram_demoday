@@ -1,0 +1,19 @@
+<div class="row">
+  <aside class="col-md-4">
+  </aside>
+  <div class="col-md-8">
+    <% if @user.follower_users.any? %>
+      <h3>Followers (<%= @user.follower_users.count %>)</h3>
+      <ol class="follows">
+        
+      <% @user.follower_users.each do |follower| %>
+      <li>
+        <%= link_to gravatar_for(follower, size: 50), follower %>
+        <span class="user"><%= link_to follower.name, follower %></span>
+      </li>
+      <% end %>
+      
+      </ol>
+    <% end %>
+  </div>
+</div>

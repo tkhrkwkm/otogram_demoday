@@ -1,8 +1,26 @@
 <div id="Profile" class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <%= render 'shared/user_info' %>
+      <div class="clearfix">
+        <div class="avatar"><%= link_to gravatar_for(@user, size: 72), @user %></div>
+        <div class="name"><%= link_to @user.name, @user %></div>
+      </div>
+      <ul class="clearfix">
+        <li>
+          <div class="status_label">ティンバー</div>
+          <div class="status_value"><%= link_to @user.timbres.count, '#' %></div>
+        </li>
+        <li>
+          <div class="status_label">フォロー</div>
+          <div class="status_value"><a href="#">0</a></div>
+        </li>
+        <li>
+          <div class="status_label">フォロワー</div>
+          <div class="status_value"><a href="#">0</a></div>
+        </li>
+      </ul>
     </section>
+    <%= render 'follow_form' if logged_in? %>
   </aside>
   <div class="col-md-8">
     <section class="timbre_list">
