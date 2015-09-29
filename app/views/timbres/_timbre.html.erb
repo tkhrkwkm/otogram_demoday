@@ -1,13 +1,7 @@
 <li id="timbre-<%= timbre.id %>">
-  <div class="clearfix">
-    <div class="avatar"><%= link_to gravatar_for(timbre.user, size: 48), timbre.user %></div>
-    <div class="content">
-      <div class="info">
-        <%= link_to timbre.user.name, timbre.user %>&nbsp;
-        <%= time_ago_in_words(timbre.created_at) %>&nbsp;
-        <% if current_user == timbre.user %><%= link_to '削除', timbre, method: :delete, data: { confirm: 'マジ？' } %><% end %>
-      </div>
-      <div class="sound_src"><%= timbre.sound_src %></div>
-    </div>
-  </div>
+    <%= link_to gravatar_for(timbre.user, size: 48), timbre.user %>
+    <%= link_to timbre.user.name, timbre.user %>&nbsp;
+    <%= time_ago_in_words(timbre.created_at) %>&nbsp;
+    <% if current_user == timbre.user %><%= link_to '削除', timbre, method: :delete, data: { confirm: 'マジ？' } %><% end %>
+    <%= timbre.sound_src %>
 </li>

@@ -1,8 +1,3 @@
-/* breakpointの変更 */
-$screen-sm-min: 0px;
-$screen-md-min: 0px;
-$screen-lg-min: none;
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 /*------------------------------------------------------------------------------
@@ -72,9 +67,13 @@ img {
 reset bootstrap
 ------------------------------------------------------------------------------*/
 /* header */
+.navbar {
+  margin-bottom: 0;
+}
 .navbar-default {
   background-color: #fff;
-  border-color: #e6e6e6;
+  border: none;
+  box-shadow: 0px 1px 0 rgba(0,0,0,0.1);
 }
 .navbar-default .navbar-brand {
   font-weight: bold;
@@ -84,13 +83,17 @@ reset bootstrap
   color: #333;
 }
 .navbar-nav {
-  .gravatar {
+  .avatar {
     margin-right: 2px;
     line-height: 20px;
     img {
       display: inline;
+      border-radius: 100%;
     }
   }
+}
+.navbar-nav > li.dropdown > a {
+  padding-bottom: 11px;
 }
 /* form */
 input[type="submit"] {
@@ -111,9 +114,17 @@ input[type="submit"] {
   @extend .has-error;
 }
 /*------------------------------------------------------------------------------
+Main
+------------------------------------------------------------------------------*/
+#Main {
+  padding-top: 50px;
+}
+
+/*------------------------------------------------------------------------------
 Top
 ------------------------------------------------------------------------------*/
 #Top {
+  padding-top: 20px;
   h1 {
     padding: 50px;
     font-size: 60px;
@@ -124,68 +135,11 @@ Top
 Home
 ------------------------------------------------------------------------------*/
 #Home {
+  padding-top: 20px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: bold;
-  }
-  section.user_info {
-    margin-bottom: 10px;
-    padding: 5px;
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
-    div.avatar {
-      float: left;
-    }
-    div.name {
-      margin-left: 10px;
-      float: left;
-    }
-    div.name a {
-      color: #333;
-      font-weight: bold;
-    }
-    ul li {
-      float: left;
-      width: 33%;
-      text-align: center;
-    }
-    ul li div.status_label {
-      font-size:12px;
-    }
-    ul li a {
-      font-weight: bold;
-    }
-  }
-  section.timbre_form {
-    padding: 5px;
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
-    text-align: center;
-  }
-  section.timbre_list {
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
-    li {
-      padding: 5px;
-      border-bottom: 1px solid #e6e6e6;
-    }
-    li:last-child {
-      border-bottom: none;
-    }
-    div.avatar,
-    div.content {
-      float: left;
-    }
-    div.content {
-      margin-left: 10px;
-    }
-    div.info {
-      font-size: 12px;
-    }
   }
 }
 
@@ -193,6 +147,7 @@ Home
 Signup
 ------------------------------------------------------------------------------*/
 #Signup {
+  padding-top: 20px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -203,6 +158,7 @@ Signup
 Login
 ------------------------------------------------------------------------------*/
 #Login {
+  padding-top: 20px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -213,6 +169,10 @@ Login
 Settings
 ------------------------------------------------------------------------------*/
 #Settings {
+  div.inner {
+    padding: 20px 0;
+    background: #0cf;
+  }
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -223,55 +183,62 @@ Settings
 Profile
 ------------------------------------------------------------------------------*/
 #Profile {
+  div.inner {
+    margin-bottom: 20px;
+    padding: 20px 0;
+    background: #0cf;
+  }
   section.user_info {
-    margin-bottom: 10px;
-    padding: 5px;
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
-    div.avatar {
-      float: left;
+    text-align: center;
+    div.avatar{
+      margin: 0 auto 10px;
+      width: 80px;
+      height: 80px;
+      img {
+        border: 4px solid #fff;
+        border-radius: 100%;
+        box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+      }
+      a {
+        display: block;
+      }
     }
     div.name {
-      margin-left: 10px;
-      float: left;
-    }
-    div.name a {
-      color: #333;
+      margin-bottom: 10px;
+      font-size: 30px;
       font-weight: bold;
+    }
+    ul {
+      margin: 0 auto;
+      width: 600px;
     }
     ul li {
       float: left;
       width: 33%;
       text-align: center;
     }
-    ul li div.status_label {
-      font-size:12px;
-    }
-    ul li a {
+    ul li div.status_value a {
+      font-size:16px;
       font-weight: bold;
     }
+    ul li div.status_label {
+      font-size:12px;
+      font-weight: bold;
+    }
+    form {
+      margin-top: 20px;
+    }
   }
+  
   section.timbre_list {
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    border-radius: 6px;
     li {
-      padding: 5px;
-      border-bottom: 1px solid #e6e6e6;
-    }
-    li:last-child {
-      border-bottom: none;
-    }
-    div.avatar,
-    div.content {
+      margin: 10px;
+      padding: 10px;
+      width: 265px;
       float: left;
-    }
-    div.content {
-      margin-left: 10px;
-    }
-    div.info {
-      font-size: 12px;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 6px;
     }
   }
 }

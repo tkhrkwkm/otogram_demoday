@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   def show
    @user = User.find(params[:id])
+   @timbre = @user.timbres.new
    @timbres = @user.timbres.order(created_at: :desc)
   end
   

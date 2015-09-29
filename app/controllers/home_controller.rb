@@ -2,8 +2,7 @@ class HomeController < ApplicationController
   def top
     
     if logged_in?
-      @timbre = current_user.timbres.new
-      @timbres = current_user.timbres.order(created_at: :desc)
+      redirect_to user_path(current_user)
     end
     
   end
