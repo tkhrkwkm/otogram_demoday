@@ -66,7 +66,6 @@ img {
 /*------------------------------------------------------------------------------
 reset bootstrap
 ------------------------------------------------------------------------------*/
-/* header */
 .navbar {
   margin-bottom: 0;
 }
@@ -95,7 +94,9 @@ reset bootstrap
 .navbar-nav > li.dropdown > a {
   padding-bottom: 11px;
 }
-/* form */
+.alert {
+  margin-bottom: 0;
+}
 input[type="submit"] {
   font-weight: bold;
 }
@@ -169,10 +170,7 @@ Login
 Settings
 ------------------------------------------------------------------------------*/
 #Settings {
-  div.inner {
-    padding: 20px 0;
-    background: #0cf;
-  }
+  padding-top: 20px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -210,7 +208,7 @@ Profile
     }
     ul {
       margin: 0 auto;
-      width: 600px;
+      max-width: 600px;
     }
     ul li {
       float: left;
@@ -240,5 +238,94 @@ Profile
       border: 1px solid #e6e6e6;
       border-radius: 6px;
     }
+  }
+}
+/*------------------------------------------------------------------------------
+Follow
+------------------------------------------------------------------------------*/
+#Following,
+#Followers {
+  div.inner {
+    margin-bottom: 20px;
+    padding: 20px 0;
+    background: #0cf;
+  }
+  section.user_info {
+    text-align: center;
+    div.avatar a {
+      display: block;
+      margin: 0 auto 10px;
+      width: 80px;
+      height: 80px;
+      img {
+        border: 4px solid #fff;
+        border-radius: 100%;
+        box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+      }
+    }
+    div.name {
+      margin-bottom: 10px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    ul {
+      margin: 0 auto;
+      max-width: 600px;
+    }
+    ul li {
+      float: left;
+      width: 33%;
+      text-align: center;
+    }
+    ul li div.status_value a {
+      font-size:16px;
+      font-weight: bold;
+    }
+    ul li div.status_label {
+      font-size:12px;
+      font-weight: bold;
+    }
+    form {
+      margin-top: 20px;
+    }
+  }
+  
+  section.following_list,
+  section.follower_list {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    li {
+      padding: 5px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    div.avatar,
+    div.info {
+      float: left;
+    }
+    div.avatar a {
+      display: block;
+      img {
+        border-radius: 100%;
+      }
+    }
+    div.info {
+      margin-left: 10px;
+    }
+    div.info p.name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    div.info p.data {
+      font-size: 10px;
+      font-weight: bold;
+    }
+    div.info p.data span {
+      color: #369;
+    }
+    
   }
 }

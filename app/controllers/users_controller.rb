@@ -42,10 +42,12 @@ class UsersController < ApplicationController
 
   def following
     @user = User.find(params[:id])
+    @timbre = @user.timbres.new
   end
   
   def followers
     @user = User.find(params[:id])
+    @timbre = @user.timbres.new
   end
 
   private

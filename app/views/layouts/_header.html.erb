@@ -19,6 +19,7 @@
         <li><%= link_to '新規登録', signup_path %></li>
         <li><%= link_to 'ログイン', login_path %></li>
       <% else %>
+        <li><button type="button" class="btn btn-primary navbar-btn" style="font-weight:bold;">New オト</button></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <span class="avatar"><%= gravatar_for current_user , size: 20 %></span>

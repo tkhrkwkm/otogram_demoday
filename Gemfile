@@ -51,6 +51,7 @@ group :development do
   gem 'pry-rails'      # rails console(もしくは、rails c)でirbの代わりにpryを使われる
   gem 'pry-doc'        # methodを表示
   gem 'pry-byebug'     # デバッグ
+  gem 'seed_dump'      # 
   
   gem 'sqlite3'
 end

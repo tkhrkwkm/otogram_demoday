@@ -1,0 +1,24 @@
+<section class="user_info">
+  <div class="clearfix">
+    <div class="avatar"><%= link_to gravatar_for(@user, size: 72), @user %></div>
+    <div class="name"><%= link_to @user.name, @user %></div>
+  </div>
+  <ul class="clearfix">
+    <li>
+      <div class="status_value"><%= link_to @user.timbres.count, user_path(@user) %></div>
+      <div class="status_label">オト</div>
+    </li>
+    <li>
+      <div class="status_value"><%= link_to @user.following_users.count, following_path(@user) %></div>
+      <div class="status_label">フォロー</div>
+    </li>
+    <li>
+      <div class="status_value"><%= link_to @user.follower_users.count, followers_path(@user) %></div>
+      <div class="status_label">フォロワー</div>
+    </li>
+  </ul>
+  
+  <% if logged_in? && current_user != @user %>
+    <%= render 'follow_form' %>
+  <% end %>
+</section>

@@ -1,19 +1,39 @@
-<div class="row">
-  <aside class="col-md-4">
-  </aside>
-  <div class="col-md-8">
-    <% if @user.follower_users.any? %>
-      <h3>Followers (<%= @user.follower_users.count %>)</h3>
-      <ol class="follows">
-        
-      <% @user.follower_users.each do |follower| %>
-      <li>
-        <%= link_to gravatar_for(follower, size: 50), follower %>
-        <span class="user"><%= link_to follower.name, follower %></span>
-      </li>
-      <% end %>
-      
-      </ol>
-    <% end %>
+<div id="Followers">
+
+  <div class="inner">
+  <div class="container">
+  <div class="row">
+  <div class="col-sm-12">
+    <%= render 'user_info' %>
   </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="container">
+  <div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+    <section class="follower_list">
+      <% if @user.follower_users.any? %>
+        
+        <ul>
+        <% @user.follower_users.each do |follower| %>
+        <li>
+          <div class="clearfix">
+            <div class="avatar"><%= link_to gravatar_for(follower, size: 48), follower %></div>
+            <div class="info">
+              <p class="name"><%= link_to follower.name, follower %></p>
+              <p class="data"><span><%= follower.follower_users.count %></span>オト <span><%= follower.follower_users.count %></span>フォロー <span><%= follower.follower_users.count %></span>フォロワー</p>
+            </div>
+          </div>
+        </li>
+        <% end %>
+        </ul>
+
+      <% end %>
+    </section>
+  </div>
+  </div>
+  </div>
+
 </div>
