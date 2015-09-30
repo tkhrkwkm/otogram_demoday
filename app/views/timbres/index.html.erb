@@ -1,0 +1,8 @@
+<%= form_for(@timbre) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Compose new timbre...' %>
+    <%= f.text_field :json, class: 'form-control', placeholder: 'Compose new timbre...' %>
+    <%= f.submit '送信', class: 'btn btn-primary' %>
+  </div>
+<% end %>

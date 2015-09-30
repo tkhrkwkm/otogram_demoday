@@ -1,6 +1,11 @@
 class TimbresController < ApplicationController
   before_action :logged_in_user, only: [:create]
-
+  
+  def index
+    @timbre = current_user.timbres.new
+    @timbres = current_user.timbres.order(created_at: :desc)
+  end
+  
   def create
     @timbre = current_user.timbres.new(timbre_params)
     if @timbre.save
@@ -21,6 +26,6 @@ class TimbresController < ApplicationController
   
   private
   def timbre_params
-    params.require(:timbre).permit(:sound_src)
+    params.require(:timbre).permit(:name, :json)
   end
 end

@@ -26,7 +26,8 @@ ActiveRecord::Schema.define(version: 20150911062842) do
 
   create_table "timbres", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "sound_src"
+    t.string   "name"
+    t.string   "json"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

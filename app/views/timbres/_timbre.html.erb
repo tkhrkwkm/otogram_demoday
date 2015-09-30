@@ -3,5 +3,5 @@
     <%= link_to timbre.user.name, timbre.user %>&nbsp;
     <%= time_ago_in_words(timbre.created_at) %>&nbsp;
     <% if current_user == timbre.user %><%= link_to '削除', timbre, method: :delete, data: { confirm: 'マジ？' } %><% end %>
-    <%= timbre.sound_src %>
+    <%= timbre.data %>
 </li>

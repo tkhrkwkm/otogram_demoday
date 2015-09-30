@@ -13,25 +13,23 @@
   <div class="container">
   <div class="row">
   <div class="col-sm-10 col-sm-offset-1">
+    <% if @user.following_users.any? %>
     <section class="following_list">
-      <% if @user.following_users.any? %>
-        
-        <ul>
-        <% @user.following_users.each do |following| %>
-        <li>
-          <div class="clearfix">
-            <div class="avatar"><%= link_to gravatar_for(following, size: 48), following %></div>
-            <div class="info">
-              <p class="name"><%= link_to following.name, following %></p>
-              <p class="data"><span><%= following.following_users.count %></span>オト <span><%= following.following_users.count %></span>フォロー <span><%= following.follower_users.count %></span>フォロワー</p>
-            </div>
+      <ul>
+      <% @user.following_users.each do |following| %>
+      <li>
+        <div class="clearfix">
+          <div class="avatar"><%= link_to gravatar_for(following, size: 48), following %></div>
+          <div class="info">
+            <p class="name"><%= link_to following.name, following %></p>
+            <p class="data"><span><%= following.following_users.count %></span>オト <span><%= following.following_users.count %></span>フォロー <span><%= following.follower_users.count %></span>フォロワー</p>
           </div>
-        </li>
-        <% end %>
-        </ul>
-
+        </div>
+      </li>
       <% end %>
+      </ul>
     </section>
+    <% end %>
   </div>
   </div>
   </div>
