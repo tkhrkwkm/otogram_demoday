@@ -1,0 +1,17 @@
+<div id="Settings">
+<div class="container">
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h1>New オト</h1>
+    <%= form_for(@timbre) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-group">
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+      <%= f.hidden_field :json %>
+      </div>
+      <%= f.submit '作成', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+</div>
+</div>

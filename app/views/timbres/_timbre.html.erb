@@ -1,7 +1,12 @@
 <li id="timbre-<%= timbre.id %>">
     <%= link_to gravatar_for(timbre.user, size: 48), timbre.user %>
-    <%= link_to timbre.user.name, timbre.user %>&nbsp;
-    <%= time_ago_in_words(timbre.created_at) %>&nbsp;
-    <% if current_user == timbre.user %><%= link_to '削除', timbre, method: :delete, data: { confirm: 'マジ？' } %><% end %>
-    <%= timbre.data %>
+    <%= link_to timbre.user.name, timbre.user %><br>
+    Name:<%= timbre.name %><br>
+    Json:<%= timbre.json %><br>
+    Posted <%= time_ago_in_words(timbre.created_at) %> ago.<br>
+    Edited <%= time_ago_in_words(timbre.updated_at) %> ago.<br>
+    <% if current_user == timbre.user %>
+        <%= link_to '編集', edit_timbre_path(timbre) %>
+        <%= link_to '削除', timbre, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% end %>
 </li>
