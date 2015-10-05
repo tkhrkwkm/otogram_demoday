@@ -12,7 +12,7 @@ class TimbresController < ApplicationController
     @timbre = current_user.timbres.build(timbre_params)
     if @timbre.save
       flash[:success] = "Timbre created!"
-      redirect_to root_path
+      redirect_to edit_timbre_path(@timbre)
     else
       render new_timbre_path
     end

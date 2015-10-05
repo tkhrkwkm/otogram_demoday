@@ -1,17 +1,75 @@
 <div id="Settings">
 <div class="container">
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-10 col-sm-offset-1">
     <h1>Edit オト</h1>
     <%= form_for(@timbre) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      <div class="form-group">
-      <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
-      <%= f.hidden_field :json %>
+      <div class="form-group col-sm-4">
+        <label>Name: </label>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
       </div>
-      <%= f.submit '作成', class: 'btn btn-primary' %>
-    <% end %>
+      <div class="form-group col-sm-2">
+        <label class="control-label" for="timbre_name">テンポ</label>
+        <input type="text" id="Tempo" class="form-control" placeholder="テンポ">
+      </div>
+
+<style>
+section {margin-bottom:10px;}
+label,.memo {color:#000;font-size:10px;font-weight:bold;}
+
+</style>
+
+<section>
+  <!--select id="Timbre">
+    <option value="0">Sound01</option>
+    <option value="1">Sound02</option>
+    <option value="2">Sound03</option>
+    <option value="3">Sound04</option>
+    <option value="4">Sound05</option>
+  </select-->
+  
+  
+</section>
+
+<section class="canvas">
+  <canvas id="Canvas"></canvas>
+</section>
+
+<section>
+    <button type="button" id="Play" class="btn btn-default">Play</button>
+    <button type="button" id="Stop" class="btn btn-default">Stop</button>
+    <button type="button" id="Clear" class="btn btn-default">Clear</button>
+    <button type="button" id="Score" class="btn btn-default">Score</button>
+    
+    <select id="Code">
+      <option value="">---</option>
+      <option value="0">カノン進行</option>
+      <option value="1">王道進行</option>
+      <option value="2">小室進行</option>
+    </select>
+</section>
+
+<section>
+  <p><label>赤線[ド]　Shift[#]　Control[♭]　左Click[取り消し]</label></p>
+</section>
+
+<section>
+  <button type="button" id="Live" class="btn btn-default">Live Input</button>
+  <button type="button" id="C" class="btn btn-default">C4:ド</button>
+</section>
+
+<section>
+  <p><label>[周波数] <span id="Pitch">--</span>Hz　[コード] <span id="Note">--</span></label></p>
+</section>
+
+  <%= f.hidden_field :json %>
+  <%= f.submit '保存', class: 'btn btn-primary' %>
+  <% end %>
   </div>
 </div>
 </div>
 </div>
+
+
+<%= javascript_include_tag 'score' %>
