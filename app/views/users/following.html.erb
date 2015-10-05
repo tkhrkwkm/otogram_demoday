@@ -22,7 +22,7 @@
           <div class="avatar"><%= link_to gravatar_for(following, size: 48), following %></div>
           <div class="info">
             <p class="name"><%= link_to following.name, following %></p>
-            <p class="data"><span><%= following.following_users.count %></span>オト <span><%= following.following_users.count %></span>フォロー <span><%= following.follower_users.count %></span>フォロワー</p>
+            <p class="data"><span><%= following.timbres.count %></span>オト <span><%= following.following_users.count %></span>フォロー <span><%= following.follower_users.count %></span>フォロワー</p>
           </div>
         </div>
       </li>
