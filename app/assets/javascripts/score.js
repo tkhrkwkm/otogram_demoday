@@ -336,7 +336,7 @@ function buttonSet(){
     else clear();
   });
   $('#Tempo').change(function() {
-    Tempo = $(this).val();
+    Score.tempo = Tempo = $(this).val();
   });
   $('form').on('submit', function(e){
     e.preventDefault();
