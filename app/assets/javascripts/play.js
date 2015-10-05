@@ -174,10 +174,13 @@ window.addEventListener('load', function(){
   
   //show or hide PlayBtn
   $("ul.timbres li").each(function() {
+    var flag = false;
     var json = $(this).find('.json').text();
+    
+    if(!json) return $(this).find('.set').hide();
+    
     var obj = JSON.parse(json);
     var len = obj.notes.length;
-    var flag = false;
     for(var i=0;i<len;i++){
       if(obj.notes[i] != '') flag = true;
     }
