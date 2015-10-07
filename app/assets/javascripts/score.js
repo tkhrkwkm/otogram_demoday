@@ -378,8 +378,8 @@ window.addEventListener('load', function(){
   if($('#timbre_json').val()){
     var setScore = JSON.parse($('#timbre_json').val());
     Score = clone(setScore);
-    //Tempo =  Score.tempo;
-    //$('#Tempo').val(Tempo);
+    Tempo =  Score.tempo;
+    $('#Tempo').val(Tempo);
   }
   
   

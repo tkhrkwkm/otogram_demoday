@@ -125,10 +125,11 @@ Main
 Top
 ------------------------------------------------------------------------------*/
 #Top {
-  padding-top: 20px;
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
   h1 {
-    padding: 50px;
-    font-size: 60px;
     text-align: center;
   }
 }
