@@ -48,7 +48,7 @@ gem 'pry-rails'      # rails console(もしくは、rails c)でirbの代わり�
 gem 'pry-doc'        # methodを表示
 gem 'pry-byebug'     # デバッグ
 gem 'seed_dump'      # seed生成
-#gem 'non-stupid-digest-assets' #assetsダイジェスト無しのパス生成
+gem 'non-stupid-digest-assets' #assetsダイジェスト無しのパス生成
   
 group :development do
   gem 'sqlite3'
