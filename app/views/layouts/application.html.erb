@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <title>オトグラム(仮)</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
+  <title>オトグラム(仮)</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body>
   
@@ -17,6 +19,16 @@
     
     <%= yield %>
   </div>
+  
+  <%= javascript_include_tag 'application' %>
+  <script>
+    $.feedback({
+      ajaxURL: 'http://test.url.com/feedback',
+      html2canvasURL: '<%= asset_path 'html2canvas.min.js' %>'
+    });
+  </script>
+  
+  <%= asset_path 'icons.png' %>
   
 </body>
 </html>

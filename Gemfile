@@ -42,15 +42,15 @@ group :development, :test do
 end
 
 gem 'bootstrap-sass'
-
-group :development do
-  gem 'hirb'           # モデルの出力結果を表形式で表示するGem
-  gem 'hirb-unicode'   # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
-  gem 'pry-rails'      # rails console(もしくは、rails c)でirbの代わりにpryを使われる
-  gem 'pry-doc'        # methodを表示
-  gem 'pry-byebug'     # デバッグ
-  gem 'seed_dump'      # 
+gem 'hirb'           # モデルの出力結果を表形式で表示するGem
+gem 'hirb-unicode'   # 日本語などマルチバイト文字の出力時の出力結果のずれに対応
+gem 'pry-rails'      # rails console(もしくは、rails c)でirbの代わりにpryを使われる
+gem 'pry-doc'        # methodを表示
+gem 'pry-byebug'     # デバッグ
+gem 'seed_dump'      # seed生成
+#gem 'non-stupid-digest-assets' #assetsダイジェスト無しのパス生成
   
+group :development do
   gem 'sqlite3'
 end
 
