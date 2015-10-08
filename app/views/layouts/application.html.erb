@@ -11,7 +11,7 @@
 <body>
   
   <%= render 'layouts/header' %>
-  
+
   <div id="Main">
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>
@@ -19,9 +19,9 @@
     
     <%= yield %>
   </div>
-  
-  <%#= current_user.name %>
-  
+
+  <%= render partial: "layouts/footer" %>
+
   <%= javascript_include_tag 'application' %>
   <script>
     $.feedback({
@@ -30,5 +30,6 @@
       userInfo: '<%= current_user.email if logged_in? %>',
     });
   </script>
+
 </body>
 </html>

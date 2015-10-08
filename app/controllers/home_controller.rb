@@ -5,5 +5,7 @@ class HomeController < ApplicationController
       redirect_to user_path(current_user)
     end
     
+    @timbres = Timbre.all.order(updated_at: :desc)
+    
   end
 end

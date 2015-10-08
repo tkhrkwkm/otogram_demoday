@@ -13,9 +13,27 @@
     <div class="container-fluid">
     <div class="row">
     <div class="col-sm-12">
-      <h1></h1>
+      <header>
+        <div class="headline">
+          <h1>♫<span> IS FUN</span></h1>
+          <div class="description">
+            みんなでオリジナルソングを作って奏でて歌ってみるサービスです。<br>
+            ただいま、プロトタイプ版。
+          </div>
+          <%= link_to 'さっそく作ってみる' , login_path, class: "btn btn-default" %>
+        </div>
+      </header>
+      <section>
+        <h1>- みんなのうた -</span></h1>
+        <% if @timbres.any? %>
+          <ul class="clearfix">
+            <%= render partial: 'timbres/timbre', collection: @timbres %>
+          </ul>
+        <% end %>
+      </section>
     </div>
     </div>
     </div>
   </div>
+  <%= javascript_include_tag 'play' %>
 <% end %>

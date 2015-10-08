@@ -49,7 +49,8 @@ gem 'pry-doc'        # methodを表示
 gem 'pry-byebug'     # デバッグ
 gem 'seed_dump'      # seed生成
 gem 'non-stupid-digest-assets' #assetsダイジェスト無しのパス生成
-  
+gem "font-awesome-rails" #Font-Awesome
+
 group :development do
   gem 'sqlite3'
 end

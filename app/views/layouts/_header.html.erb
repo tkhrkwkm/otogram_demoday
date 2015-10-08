@@ -9,7 +9,9 @@
         <span class="icon-bar"></span>
       </button>
       <h1>
-        <%= link_to 'オトグラム(仮)', root_path, class: 'navbar-brand' %>
+        <%= link_to root_path, class: 'navbar-brand' do %>
+          <i class="fa fa-microphone"></i> オトグラム(仮)</a>
+        <% end %>   
       </h1>
     </div>
 
