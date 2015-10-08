@@ -20,15 +20,15 @@
     <%= yield %>
   </div>
   
+  <%#= current_user.name %>
+  
   <%= javascript_include_tag 'application' %>
   <script>
     $.feedback({
-      ajaxURL: 'http://test.url.com/feedback',
-      html2canvasURL: '<%= asset_path 'html2canvas.min.js' %>'
+      ajaxURL: '<%= feedbacks_path %>',
+      html2canvasURL: '<%= asset_path 'html2canvas.js' %>',
+      userInfo: '<%= current_user.email if logged_in? %>',
     });
   </script>
-  
-  <%= asset_path 'icons.png' %>
-  
 </body>
 </html>

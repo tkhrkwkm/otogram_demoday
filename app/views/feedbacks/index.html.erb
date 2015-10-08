@@ -1,0 +1,19 @@
+<div id="Feedback">
+  <div class="container">
+  <div class="row">
+  <div class="col-sm-12">
+  <% @feedback.each do |feedback| %>
+    <% hash = JSON.parse(feedback.data) %>
+    <div style="margin-bottom:50px;">
+      <p style="font-size:12px;"><strong>送信時間: </strong><%= feedback.created_at.in_time_zone('Tokyo') %></p>
+      <p style="font-size:12px;"><strong>フィードバック: </strong><%= hash['note'] %></p>
+      <p style="font-size:12px;"><strong>ユーザー情報: </strong><%= hash['user'] %></p>
+      <p style="font-size:12px;"><strong>ブラウザ情報: </strong><%= hash['browser']['userAgent'] %></p>
+      <p style="font-size:12px;"><strong>ページ情報: </strong><%= hash['url'] %></p>
+      <p><img src='<%= hash['img'] %>' width="100%" style="border:1px solid #000;"></p>
+    </div>
+  <% end %>
+  </div>
+  </div>
+  </div>
+</div>

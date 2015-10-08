@@ -16,5 +16,5 @@
 // require_tree .
 
 //= require bootstrap-sprockets
-//= require feedback.min
-//= require html2canvas.min
+//= require feedback
+//= require html2canvas

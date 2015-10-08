@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   get '/users/:id/following'=> 'users#following', as: 'following'
   get '/users/:id/followers'=> 'users#followers', as: 'followers'
   
+  resources :feedbacks
+  
   #only:[:index,:show,:new,:create,:edit,:update,:destroy]
 end

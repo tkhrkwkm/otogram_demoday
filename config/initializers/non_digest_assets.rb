@@ -1,2 +1,2 @@
-#NonStupidDigestAssets.whitelist += [/images\/.*/, "icons.png"]
-NonStupidDigestAssets.whitelist += ["icons.png"]
+#NonStupidDigestAssets.whitelist += [/images\/.*/]
+NonStupidDigestAssets.whitelist += ['icons.png']
