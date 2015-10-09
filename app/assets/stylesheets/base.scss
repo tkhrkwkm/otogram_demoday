@@ -20,12 +20,13 @@ body {
   word-break: break-all;/*半角英数字折り返す*/
 }
 a {
-  color: #369;
+  color: #666;//#369
+  font-weight: bold;
   outline:none;/*点線ハック*/
   -webkit-tap-highlight-color: rgba(0,0,0,0);/*タップカラー*/
 }
 a:hover {
-  color: #369;
+  color: #666;
 }
 a.disable {
   cursor: default;
@@ -79,8 +80,9 @@ Header
   font-weight: bold;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #666;
+  color: #333;
   font-size: 14px;
+  font-weight: normal;
 }
 .navbar-default .navbar-nav > li > a:hover {
   text-decoration: underline;
@@ -96,7 +98,7 @@ Header
   }
 }
 .navbar-nav > li.dropdown > a {
-  padding-bottom: 11px;
+  padding-bottom: 10px;
 }
 .alert {
   margin-bottom: 0;
@@ -123,19 +125,18 @@ Main
 ------------------------------------------------------------------------------*/
 #Main {
   padding-top: 50px;
-  min-height: 600px;
 }
 /*------------------------------------------------------------------------------
 Footer
 ------------------------------------------------------------------------------*/
 footer {
-  padding: 40px 0;
-  height: 100px;
+  padding: 40px 0 97px;
+  color: #333;
   font-size: 12px;
   border-top: 2px solid #f6f6f6;
   .copyright {
     margin-bottom:40px;
-    font-weight: bold;
+    
     text-align: center;
   }
   ul {
@@ -143,6 +144,7 @@ footer {
     max-width: 400px;
   }
   ul li {
+    padding-left: 60px;
     float: left;
     width: 50%;
     line-height: 2;
@@ -152,8 +154,9 @@ footer {
   }
   ul li a,
   ul li a:hover {
-    color: #333;
     display: block;
+    color: #333;
+    font-weight: normal;
   }
 }
 /*------------------------------------------------------------------------------
@@ -167,9 +170,8 @@ Top
   }
   header {
     display:table;
+    padding: 275px 0;
     width: 100%;
-    height: 600px;
-    background: #fff;
     border-bottom: 2px solid #f6f6f6;
     div.headline {
       display: table-cell;
@@ -177,24 +179,20 @@ Top
       vertical-align: middle;
     }
     h1 {
-      display:table;
-      margin: 0 auto 20px;
-      height: 40px;
+      margin-bottom: 20px;
       font-size: 40px;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);  
     }
     h1 span {
-      display:table-cell;
-      vertical-align: middle;
       font-size: 20px;
     }
     div.description {
       margin-bottom: 20px;
     }
   }
-  section {
+  section.list {
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 80px 0;
     max-width: 1140px;
     h1 {
       margin: 0 auto 10px;
@@ -207,32 +205,21 @@ Top
       padding: 10px;
       width: 265px;
       float: left;
-      background: #fff;
+      background: #f6f6f6;
       border: 1px solid #e6e6e6;
       border-radius: 6px;
+      text-align: center;
     }
-    li span.time {
-      font-size: 10px;
+    li span {
+      font-size: 12px;
     }
   }
 }
-/*------------------------------------------------------------------------------
-Home
-------------------------------------------------------------------------------*/
-#Home {
-  padding-top: 20px;
-  h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-  }
-}
-
 /*------------------------------------------------------------------------------
 Signup
 ------------------------------------------------------------------------------*/
 #Signup {
-  padding-top: 20px;
+  padding: 80px 0 98px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -243,7 +230,7 @@ Signup
 Login
 ------------------------------------------------------------------------------*/
 #Login {
-  padding-top: 20px;
+  padding: 80px 0 244px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -254,7 +241,7 @@ Login
 Settings
 ------------------------------------------------------------------------------*/
 #Settings {
-  padding-top: 20px;
+  padding: 80px 0 244px;
   h1 {
     margin-bottom: 20px;
     font-size: 24px;
@@ -262,13 +249,12 @@ Settings
   }
 }
 /*------------------------------------------------------------------------------
-Profile
+Home
 ------------------------------------------------------------------------------*/
-#Profile {
+#Home {
   div.inner {
-    margin-bottom: 20px;
-    padding: 20px 0;
-    background: #0cf;
+    padding: 80px 0;
+    border-bottom: 2px solid #f6f6f6;
   }
   section.user_info {
     text-align: center;
@@ -311,19 +297,20 @@ Profile
       margin-top: 20px;
     }
   }
-  
-  section.timbre_list {
+  section.list {
+    padding: 80px 0;
     li {
       margin: 10px;
       padding: 10px;
       width: 265px;
       float: left;
-      background: #fff;
+      background: #f6f6f6;
       border: 1px solid #e6e6e6;
       border-radius: 6px;
+      text-align: center;
     }
-    li span.time {
-      font-size: 10px;
+    li span {
+      font-size: 12px;
     }
   }
 }
@@ -333,9 +320,8 @@ Follow
 #Following,
 #Followers {
   div.inner {
-    margin-bottom: 20px;
-    padding: 20px 0;
-    background: #0cf;
+    padding: 80px 0;
+    border-bottom: 2px solid #f6f6f6;
   }
   section.user_info {
     text-align: center;
@@ -377,9 +363,8 @@ Follow
     }
   }
   
-  section.following_list,
-  section.follower_list {
-    background: #fff;
+  section.list {
+    margin: 80px 0;
     border: 1px solid #e6e6e6;
     border-radius: 6px;
     li {

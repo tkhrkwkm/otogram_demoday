@@ -10,12 +10,12 @@
   </div>
   </div>
 
+  <% if @user.follower_users.any? %>
   <div class="container">
   <div class="row">
-  <div class="col-sm-10 col-sm-offset-1">
-    <% if @user.follower_users.any? %>
-    <section class="follower_list">
-      <ul>
+  <div class="col-sm-6 col-sm-offset-3">
+    <section class="list">
+      <ul class="clearfix">
       <% @user.follower_users.each do |follower| %>
       <li>
         <div class="clearfix">
@@ -29,9 +29,9 @@
       <% end %>
       </ul>
     </section>
-    <% end %>
   </div>
   </div>
   </div>
+  <% end %>
 
 </div>

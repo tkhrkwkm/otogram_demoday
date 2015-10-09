@@ -639,6 +639,7 @@ function animeLiveInputStop(timestamp) {
 /*------------------------------------------------------------------------------
 #Live
 ------------------------------------------------------------------------------*/
+window.addEventListener('load', function(){
 $('#Live').on('click', function() {
   if (navigator.getUserMedia) {
     
@@ -696,4 +697,5 @@ $('#C').on('click', function() {
 	sourceNode.frequency.value = 261.62;
 	sourceNode.connect(AC.destination);
 	sourceNode.start();
+});
 });

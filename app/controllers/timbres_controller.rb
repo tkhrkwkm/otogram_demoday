@@ -4,8 +4,6 @@ class TimbresController < ApplicationController
   
   def new
     @timbre = current_user.timbres.build
-    #@timbre = current_user.timbres.new
-    #@timbres = current_user.timbres.order(created_at: :desc)
   end
   
   def create
