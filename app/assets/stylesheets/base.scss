@@ -186,8 +186,12 @@ Top
     h1 span {
       font-size: 20px;
     }
-    div.description {
+    div.description,
+    p.button {
       margin-bottom: 20px;
+    }
+    p.notice {
+      font-size: 10px;
     }
   }
   section.list {
