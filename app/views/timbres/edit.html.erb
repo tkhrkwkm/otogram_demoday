@@ -20,18 +20,6 @@ label,.memo {color:#000;font-size:10px;font-weight:bold;}
 
 </style>
 
-<section>
-  <!--select id="Timbre">
-    <option value="0">Sound01</option>
-    <option value="1">Sound02</option>
-    <option value="2">Sound03</option>
-    <option value="3">Sound04</option>
-    <option value="4">Sound05</option>
-  </select-->
-  
-  
-</section>
-
 <section class="canvas">
   <canvas id="Canvas"></canvas>
 </section>
@@ -41,6 +29,12 @@ label,.memo {color:#000;font-size:10px;font-weight:bold;}
     <button type="button" id="Stop" class="btn btn-default">Stop</button>
     <button type="button" id="Clear" class="btn btn-default">Clear</button>
     <button type="button" id="Score" class="btn btn-default">Score</button>
+    
+    <select id="Timbre">
+      <option value="0">音色1</option>
+      <option value="1">音色2</option>
+      <option value="2">音色3</option>
+    </select>
     
     <select id="Code">
       <option value="">---</option>
@@ -56,11 +50,15 @@ label,.memo {color:#000;font-size:10px;font-weight:bold;}
 
 <section>
   <button type="button" id="Live" class="btn btn-default">Live Input</button>
-  <button type="button" id="C" class="btn btn-default">C4:ド</button>
+  <button type="button" id="Audio" class="btn btn-default">Audio Input</button>
+  <button type="button" id="Rec" class="btn btn-default">Rec</button>
+  <a id="Playing" style="font-size:12px;display:none;">play</a>
+  <a id="Download" style="font-size:12px"></a>
+  <!--button type="button" id="C" class="btn btn-default">C4:ド</-->
 </section>
 
 <section>
-  <p><label>[周波数] <span id="Pitch">--</span>Hz　[コード] <span id="Note">--</span></label></p>
+  <p><label>[コード] <span id="Note">--</span>　[周波数] <span id="Pitch">--</span>Hz</label></p>
 </section>
 
   <%= f.hidden_field :json %>

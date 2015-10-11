@@ -7,7 +7,7 @@ var AC = new AudioContext();
 var Sound = [];
 var Score = {};
 var March = null;
-var SoundNum = 3;//音色数
+var SoundNum = 1;//音数
 var SoundDiff = [16,14,12,11,9,7,5,4,2,0,-1,-3];//音階
 var ScoreX = 4 * 8;//1小節 * 8分音符
 var ScoreY = SoundDiff.length + 1;
@@ -425,7 +425,7 @@ var buflen = 1024;
 var buf = new Float32Array(buflen);
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 /*------------------------------------------------------------------------------
-autoCorrelate
+Pitch Detection
 ------------------------------------------------------------------------------*/
 function autoCorrelate(buf, sampleRate) {
 	var SIZE = buf.length;
@@ -471,12 +471,12 @@ function autoCorrelate(buf, sampleRate) {
 	}
 	return -1;
 }
-/*----------------------------------------------------------------------------*/
+
 function noteFromPitch(frequency) {
 	var noteNum = 12 * (Math.log(frequency / 440)/Math.log(2));
 	return Math.round(noteNum) + 69;
 }
-/*----------------------------------------------------------------------------*/
+
 function updatePitch(time) {
 	analyser.getFloatTimeDomainData(buf);
 	var ac = autoCorrelate(buf, AC.sampleRate);
@@ -493,6 +493,9 @@ function updatePitch(time) {
 
 	rafID = RAF(updatePitch);
 }
+
+
+
 /*------------------------------------------------------------------------------
 LiveInputClass
 ------------------------------------------------------------------------------*/
@@ -500,9 +503,8 @@ var LiveInput = null;
 var LiveInputID = 0;
 var LiveScale = [];
 var sourceNode = null;
-var theBuffer = null;
-/*----------------------------------------------------------------------------*/
-function numFromScale(note) {
+/*--------------------------------------------------------*/
+function scaleFromNote(note) {
 	switch (note){
     case 'C':
     case 'C#':
@@ -544,7 +546,6 @@ function numFromScale(note) {
       break;
   }
 }
-/*----------------------------------------------------------------------------*/
 function averageFromScale(arr) {
   
   //重複を削除したリスト
@@ -571,54 +572,46 @@ function averageFromScale(arr) {
     return x;
   }
 }
-/*----------------------------------------------------------------------------*/
+/*--------------------------------------------------------*/
 function LiveInputClass() {
+  this.x = 0;
   this.pos = 0;
-  this.flag = false;
-  this.blankCounter = 0;
 }
 LiveInputClass.prototype.play = function(timeStamp) {
   
   analyser.getFloatTimeDomainData(buf);
 	var ac = autoCorrelate(buf, AC.sampleRate);
 	
+	var step = Tempo / 60;
+	var interval = (this.pos + 1) * 30 - 1;
+	
  	if(ac == -1){
 	 	$('#Pitch').text("--");
 		$('#Note').text("--");
-		this.blankCounter++;
-		
-  	if (this.flag && LiveScale.length >= 20 || this.blankCounter == 120) {
-      console.log(LiveScale.length)
-      if(this.flag && LiveScale.length >= 20){
-        var avgScale = averageFromScale(LiveScale);
-        //console.log(avgScale)
-        var num = numFromScale(avgScale);
-        Score.notes[this.pos].push(num);
-      }
-      
-      this.pos++;
-      LiveScale = [];
-      this.flag = false;
-      this.blankCounter = 0;
-    }
-    
  	}else{
     var pitch = Math.round(ac);
     $('#Pitch').text(pitch) ;
     var note =  noteStrings[noteFromPitch(pitch)%12];
 		$('#Note').text(note);
 		
-		LiveScale.push(note);
-		this.flag = true;
+		//進行赤線
+    this.x += step;
+    Layer.fillStyle = 'rgba(255,0,0,0.5)';
+    Layer.fillRect(this.x,0,5,240);
+    
+		LiveScale.push(scaleFromNote(note));
+		//LiveScale.push(pitch);
+		
+		if (this.x >= interval) {
+		  var scale = averageFromScale(LiveScale);
+		  //console.log(scale)
+		  Score.notes[this.pos].push(scale);
+      this.pos++;
+      LiveScale = [];
+    }
 	}
-	
-	//進行赤線
-  Layer.fillStyle = 'rgba(255,0,0,0.5)';
-  Layer.fillRect(30*this.pos,0,30,240);
 };
-/*------------------------------------------------------------------------------
-animeLive
-------------------------------------------------------------------------------*/
+/*--------------------------------------------------------*/
 function animeLiveInputPlay(timestamp) {
   LiveInput.play(timestamp);
   LiveInputID = RAF(animeLiveInputPlay);
@@ -642,313 +635,67 @@ function animeLiveInputStop(timestamp) {
   
 	LiveScale = [];
 }
+
 /*------------------------------------------------------------------------------
-Button
+#Live
 ------------------------------------------------------------------------------*/
 window.addEventListener('load', function(){
-  $('#Live').on('click', function() {
-    if (navigator.getUserMedia) {
-      
-      if(isLive){
-        RAF(animeLiveInputStop);
-        return;
-      }
-  	  
-  	  navigator.getUserMedia (
-  			// constraints
-  			{
-  				audio: {
-            "mandatory": {
-                "googEchoCancellation": "false",
-                "googAutoGainControl" : "false",
-                "googNoiseSuppression": "false",
-                "googHighpassFilter"  : "false"
-            },
-            "optional": []
-          }
-  			},
-  			// successCallback
-  			function(stream) {
-  			  localMediaStream = stream;
-          analyser = AC.createAnalyser();
-          analyser.fftSize = 2048;
-        	mediaStreamSource = AC.createMediaStreamSource(localMediaStream);
-        	mediaStreamSource.connect(analyser);
-        	//updatePitch();
-        	
-        	$('#Live').text('Stop');
-        	isLive = true;
-        	
-        	LiveInput = new LiveInputClass();
-        	RAF(animeLiveInputPlay);
-  			},
-  			// errorCallback
-  			function(err) {
-  				console.log(err);
-  			}
-  		);
-  	}else{
-  	  console.log("getUserMedia not supported");
-  	}
-  });
-/*----------------------------------------------------------------------------*/
-  $('#Audio').prop("disabled", true);
-  $('#Audio').on('click', function() {
-  	
-  	if(sourceNode) {
-  	  $('#Audio').text('Audio Input');
-      sourceNode.stop();
-  	  sourceNode = null;
-  		analyser = null;
-  		CAF(LiveInputID);
-  		return;
-  	}
-  	
-  	sourceNode = AC.createBufferSource();
-    sourceNode.buffer = theBuffer;
+$('#Live').on('click', function() {
+  if (navigator.getUserMedia) {
     
-    analyser = AC.createAnalyser();
-    analyser.fftSize = 2048;
-    
-    sourceNode.connect(analyser);
-    analyser.connect(AC.destination);
-    sourceNode.start(0);
-    
-    $('#Audio').text('Stop');//.prop("disabled", true);
-    sourceNode.onended = function() {
-      $('#Audio').text('Audio Input');
-      sourceNode.stop();
-  	  sourceNode = null;
-  		analyser = null;
-  		CAF(LiveInputID);
-  		return;
-    }
-    
-    LiveInput = new LiveInputClass();
-    RAF(animeLiveInputPlay);
-  });
-  /*-------------------------------*/
-  var request = new XMLHttpRequest();
-	request.open("GET", "/sounds/audio.mp3", true);
-	request.responseType = "arraybuffer";
-	request.onload = function() {
-	  AC.decodeAudioData( request.response, function(buffer) { 
-	    	theBuffer = buffer;
-	    	$('#Audio').prop("disabled", false);
-		} );
-	};
-	request.send();
-/*----------------------------------------------------------------------------*/
-	$('#Rec').on('click', function() {
     if(isLive){
       RAF(animeLiveInputStop);
-      recorder.recStop();
-      $('#Rec').text('Rec');
-      $('#Playing').show();
-      isLive = false;
-      //download link
-      var download = document.querySelector('#Download');
-      var blob = exportWAV(recorder.getAudioBufferArray(), AC.sampleRate);
-      var url = URL.createObjectURL(blob);
-      download.href = url;
-      download.textContent = 'download'
-      download.download = 'audio.wav';
       return;
     }
-    
-    navigator.getUserMedia (
-    // constraints
-      {
-        audio: {
+	  
+	  navigator.getUserMedia (
+			// constraints
+			{
+				audio: {
           "mandatory": {
-            "googEchoCancellation": "false",
-            "googAutoGainControl" : "false",
-            "googNoiseSuppression": "false",
-            "googHighpassFilter"  : "false"
+              "googEchoCancellation": "false",
+              "googAutoGainControl" : "false",
+              "googNoiseSuppression": "false",
+              "googHighpassFilter"  : "false"
           },
           "optional": []
         }
-      },
-      // successCallback
-      function(stream) {
-        localMediaStream = stream;
+			},
+			// successCallback
+			function(stream) {
+			  localMediaStream = stream;
         analyser = AC.createAnalyser();
         analyser.fftSize = 2048;
-        mediaStreamSource = AC.createMediaStreamSource(localMediaStream);
-        mediaStreamSource.connect(analyser);
-        
-        $('#Rec').text('Stop');
-        isLive = true;
-        
-        LiveInput = new LiveInputClass();
-        RAF(animeLiveInputPlay);
-        
-        recorder.recStart();
-      },
-      // errorCallback
-      function(err) {
-      	console.log(err);
-      }
-    );
-  });
-/*----------------------------------------------------------------------------*/
-  $('#Playing').on('click', function() {
-    if(sourceNode){
-      sourceNode.stop();
-      sourceNode = null;
-      $('#Playing').text('play').prop("disabled", false);
-      return;
-  	}
-    //play
-    sourceNode = AC.createBufferSource();
-    sourceNode.buffer = recorder.getAudioBuffer();
-    sourceNode.connect(AC.destination);
-    sourceNode.start(0)
-    $('#Playing').text('playing...').prop("disabled", true);
-    sourceNode.onended = function(){
-      $('#Playing').text('play').prop("disabled", false);
-    };
-  });
-/*----------------------------------------------------------------------------*/
-  $('#C').on('click', function() {
-  	if(sourceNode){
-  	  sourceNode.stop();
-  	  sourceNode = null;
-  	  return;
-  	}
-  	
-  	sourceNode = AC.createOscillator();
-  	sourceNode.frequency.value = 261.62;
-  	sourceNode.connect(AC.destination);
-  	sourceNode.start();
-  });
+      	mediaStreamSource = AC.createMediaStreamSource(localMediaStream);
+      	mediaStreamSource.connect(analyser);
+      	//updatePitch();
+      	
+      	$('#Live').text('Stop');
+      	isLive = true;
+      	
+      	LiveInput = new LiveInputClass();
+      	RAF(animeLiveInputPlay);
+			},
+			// errorCallback
+			function(err) {
+				console.log(err);
+			}
+		);
+	}else{
+	  console.log("getUserMedia not supported");
+	}
 });
-/*------------------------------------------------------------------------------
-Recorder
-------------------------------------------------------------------------------*/
-window.Recorder = function(audioContext, bufferSize){
-    var o = this;
-    o.audioContext = audioContext;
-    o.bufferSize = bufferSize || 4096;
-}
-Recorder.prototype = {
-    audioContext : '',
-    bufferSize : '',
-    audioBufferArray : [],
-    stream : '',
-    recording : function(stream){
-        var o = this;
-        o.stream = stream;
-        var mediaStreamSource =
-            o.audioContext.createMediaStreamSource(stream);
-        var scriptProcessor =
-            o.audioContext.createScriptProcessor(o.bufferSize, 1, 1);
-        mediaStreamSource.connect(scriptProcessor);
-        o.audioBufferArray = [];
-        scriptProcessor.onaudioprocess = function(event){
-            var channel = event.inputBuffer.getChannelData(0);
-            var buffer = new Float32Array(o.bufferSize);
-            for (var i = 0; i < o.bufferSize; i++) {
-                buffer[i] = channel[i];
-            }
-            o.audioBufferArray.push(buffer);
-        }
-        //この接続でonaudioprocessが起動
-        scriptProcessor.connect(o.audioContext.destination);
-        o.scriptProcessor = scriptProcessor;
-    },
-    recStart : function(){
-        var o = this;
-        if(o.stream){
-            o.recording(o.stream);
-        }
-        else{
-            navigator.getUserMedia(
-                {video: false, audio: true},
-                function(stream){o.recording(stream)},
-                function(err){
-                    console.log(err.name ? err.name : err);
-                }
-            );
-        }
-    },
-    recStop : function(){
-        var o = this;
-        o.scriptProcessor.disconnect();
-        if(o.stream){
-            o.stream.stop();
-            o.stream = null;
-        }
-    },
-    getAudioBufferArray : function(){
-        var o = this;
-        return o.audioBufferArray
-    },
-    getAudioBuffer : function(){
-        var o = this;
-        var buffer = o.audioContext.createBuffer(
-            1,
-            o.audioBufferArray.length * o.bufferSize,
-            o.audioContext.sampleRate
-        );
-        var channel = buffer.getChannelData(0);
-        for (var i = 0; i < o.audioBufferArray.length; i++) {
-            for (var j = 0; j < o.bufferSize; j++) {
-                channel[i * o.bufferSize + j] = o.audioBufferArray[i][j];
-            }
-        }
-        return buffer;
-    }
-}
-window.exportWAV = function(audioData, sampleRate) {
-    var encodeWAV = function(samples, sampleRate) {
-        var buffer = new ArrayBuffer(44 + samples.length * 2);
-        var view = new DataView(buffer);
-        var writeString = function(view, offset, string) {
-            for (var i = 0; i < string.length; i++){
-                view.setUint8(offset + i, string.charCodeAt(i));
-            }
-        };
-        var floatTo16BitPCM = function(output, offset, input) {
-            for (var i = 0; i < input.length; i++, offset += 2){
-                var s = Math.max(-1, Math.min(1, input[i]));
-                output.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-            }
-        };
-        writeString(view, 0, 'RIFF');  // RIFFヘッダ
-        view.setUint32(4, 32 + samples.length * 2, true); // これ以降のファイルサイズ
-        writeString(view, 8, 'WAVE'); // WAVEヘッダ
-        writeString(view, 12, 'fmt '); // fmtチャンク
-        view.setUint32(16, 16, true); // fmtチャンクのバイト数
-        view.setUint16(20, 1, true); // フォーマットID
-        view.setUint16(22, 1, true); // チャンネル数
-        view.setUint32(24, sampleRate, true); // サンプリングレート
-        view.setUint32(28, sampleRate * 2, true); // データ速度
-        view.setUint16(32, 2, true); // ブロックサイズ
-        view.setUint16(34, 16, true); // サンプルあたりのビット数
-        writeString(view, 36, 'data'); // dataチャンク
-        view.setUint32(40, samples.length * 2, true); // 波形データのバイト数
-        floatTo16BitPCM(view, 44, samples); // 波形データ
-        return view;
-    };
-    var mergeBuffers = function(audioData) {
-        var sampleLength = 0;
-        for (var i = 0; i < audioData.length; i++) {
-          sampleLength += audioData[i].length;
-        }
-        var samples = new Float32Array(sampleLength);
-        var sampleIdx = 0;
-        for (var i = 0; i < audioData.length; i++) {
-          for (var j = 0; j < audioData[i].length; j++) {
-            samples[sampleIdx] = audioData[i][j];
-            sampleIdx++;
-          }
-        }
-        return samples;
-    };
-    var dataview = encodeWAV(mergeBuffers(audioData), sampleRate);
-    var audioBlob = new Blob([dataview], { type: 'audio/wav' });
-    return audioBlob;
-};
 
-var recorder = new Recorder(AC);
+$('#C').on('click', function() {
+	if(sourceNode){
+	  sourceNode.stop();
+	  sourceNode = null;
+	  return;
+	}
+	
+	sourceNode = AC.createOscillator();
+	sourceNode.frequency.value = 261.62;
+	sourceNode.connect(AC.destination);
+	sourceNode.start();
+});
+});
