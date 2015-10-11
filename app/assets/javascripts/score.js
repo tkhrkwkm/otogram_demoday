@@ -588,7 +588,7 @@ LiveInputClass.prototype.play = function(timeStamp) {
 		this.blankCounter++;
 		
   	if (this.flag && LiveScale.length >= 20 || this.blankCounter == 120) {
-      console.log(LiveScale.length)
+      //console.log(LiveScale.length)
       if(this.flag && LiveScale.length >= 20){
         var avgScale = averageFromScale(LiveScale);
         //console.log(avgScale)
